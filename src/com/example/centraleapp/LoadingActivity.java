@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 public class LoadingActivity extends Activity {
 
 	private ProgressBar progressBar;
+	private List<PointOfInterest> pois;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,9 @@ public class LoadingActivity extends Activity {
 		setContentView(R.layout.activity_loading);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
 		progressBar.setIndeterminate(false);
+		
+		pois = new ArrayList<PointOfInterest>();
+		
 		loadData();
 	}
 
@@ -62,7 +67,6 @@ public class LoadingActivity extends Activity {
 				try {
 					JSONObject jsonObject = new JSONObject(line);
 					JSONArray jsonArray = jsonObject.getJSONArray("results");
-					List<PointOfInterest> pois = new ArrayList<PointOfInterest>();
 					progressBar.setMax(jsonArray.length());
 					for (int i = 0; i < jsonArray.length(); i++) {
 						progressBar.setProgress(i);
@@ -71,8 +75,11 @@ public class LoadingActivity extends Activity {
 						Log.i(C.TAG, poi.toString());
 						Log.i(C.TAG,i+"/"+jsonArray.length());
 					}
+					launchMainActivity();
 
 				} catch (JSONException e) {
+					Toast.makeText(this, e.getMessage(),
+							Toast.LENGTH_LONG).show();
 					Log.e(C.TAG,e.getMessage());
 				}
 			} else {
@@ -80,11 +87,20 @@ public class LoadingActivity extends Activity {
 						Toast.LENGTH_LONG).show();
 			}
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			Toast.makeText(this, e.getMessage(),
+					Toast.LENGTH_LONG).show();
+			Log.e(C.TAG,e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Toast.makeText(this, e.getMessage(),
+					Toast.LENGTH_LONG).show();
+			Log.e(C.TAG,e.getMessage());
 		}
 
+	}
+
+	private void launchMainActivity() {
+		((MyApplication) getApplication()).setPOIS(pois);
+		startActivity(new Intent(this, MainActivity.class));
 	}
 
 	private PointOfInterest makePointOfInterest(JSONObject jsonObject)
@@ -105,8 +121,7 @@ public class LoadingActivity extends Activity {
 	private String convertStreamToString(InputStream inputStream) {
 		String ligne = "";
 		StringBuilder total = new StringBuilder();
-		BufferedReader rd = new BufferedReader(new InputStreamReader(
-				inputStream));
+		BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
 		try {
 			while ((ligne = rd.readLine()) != null) {
 				total.append(ligne);
@@ -120,7 +135,7 @@ public class LoadingActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_loading, menu);
+		//getMenuInflater().inflate(R.menu.activity_loading, menu);
 		return true;
 	}
 
