@@ -1,5 +1,6 @@
 package com.example.centraleapp;
 
+
 public class PointOfInterest {
 	private String nom;
 	private String secteur;
@@ -74,6 +75,9 @@ public class PointOfInterest {
 				+ ", quartier=" + quartier + ", informations=" + informations
 				+ ", categorie=" + categorie + "]";
 	}
-
+	
+	public String getShortDescription(){
+		return quartier+" - "+secteur;
+	}
 	
 }
