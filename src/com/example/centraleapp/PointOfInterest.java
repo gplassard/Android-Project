@@ -11,6 +11,17 @@ public class PointOfInterest {
 	private String quartier;
 	private String informations;
 	private String categorie;
+	private boolean favoris;
+	
+	public PointOfInterest(){
+		double tirage = Math.random();
+		if (tirage > 0.5){
+			favoris =  false;
+		}
+		else{
+			favoris = true;
+		}
+	}
 	
 	
 	public double getLongitude() {
@@ -82,11 +93,7 @@ public class PointOfInterest {
 	
 	public boolean isFavorite(){
 		//TODO
-		double tirage = Math.random();
-		if (tirage > 0.5){
-			return false;
-		}
-		return true;
+		return favoris;
 	}
 	
 }

@@ -27,7 +27,12 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 		((TextView) findViewById(R.id.quartier)).setText(poi.getQuartier());
 		((TextView) findViewById(R.id.secteur)).setText(poi.getSecteur());
 		((TextView) findViewById(R.id.informations)).setText(poi.getInformations());
-		
+		if (poi.isFavorite()){
+			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(R.drawable.defacto_poi_ajoutfavoris_b);
+		}
+		else{
+			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(R.drawable.defacto_poi_ajoutfavoris);
+		}		
 		((Button) findViewById(R.id.boutonFavoris)).setOnClickListener(this);
 		((Button) findViewById(R.id.boutonCarte)).setOnClickListener(this);
 		((Button) findViewById(R.id.boutonYAller)).setOnClickListener(this);
