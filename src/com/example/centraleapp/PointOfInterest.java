@@ -80,4 +80,13 @@ public class PointOfInterest {
 		return quartier+" - "+secteur;
 	}
 	
+	public boolean isFavorite(){
+		//TODO
+		double tirage = Math.random();
+		if (tirage > 0.5){
+			return false;
+		}
+		return true;
+	}
+	
 }

@@ -67,7 +67,13 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		holder.icone.setImageResource(R.drawable.ic_launcher);
 		holder.tvNom.setText(poi.getNom());
 		holder.tvDescription.setText(poi.getShortDescription());
-		holder.iconeFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris);
+		if (poi.isFavorite()){
+			holder.iconeFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris_b);
+		}
+		else{
+			holder.iconeFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris);
+		}
+		
 		return convertView;
 	}
 

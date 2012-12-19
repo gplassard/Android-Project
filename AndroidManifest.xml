@@ -37,6 +37,10 @@
             android:name="com.example.centraleapp.MyListActivity"
             android:label="@string/title_activity_my_list" >
         </activity>
+        <activity
+            android:name="com.example.centraleapp.PointOfInterestActivity"
+            android:label="@string/title_activity_point_of_interest" >
+        </activity>
     </application>
 
 </manifest>
