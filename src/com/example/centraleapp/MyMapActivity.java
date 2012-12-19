@@ -3,10 +3,10 @@ package com.example.centraleapp;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MapActivity extends Activity {
+public class MyMapActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_map);
+		setContentView(R.layout.activity_my_map);
 	}
 }

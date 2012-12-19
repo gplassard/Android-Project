@@ -17,7 +17,7 @@ public class MainActivity extends TabActivity {
 		
 		Intent intentList = new Intent(this,MyListActivity.class);
 		Intent intentFavoris = new Intent(this,FavorisActivity.class);
-		Intent intentMap = new Intent(this,MapActivity.class);
+		Intent intentMap = new Intent(this,MyMapActivity.class);
 		
 		TabSpec tabSpec = tabHost.newTabSpec("Liste").setIndicator("Liste").setContent(intentList);
 		tabHost.addTab(tabSpec);

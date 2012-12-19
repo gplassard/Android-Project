@@ -31,7 +31,7 @@
         </activity>
         <activity android:name="com.example.centraleapp.ListActivity" >
         </activity>
-        <activity android:name="com.example.centraleapp.MapActivity" >
+        <activity android:name="com.example.centraleapp.MyMapActivity" >
         </activity>
         <activity
             android:name="com.example.centraleapp.MyListActivity"
