@@ -1,7 +1,10 @@
 package com.example.centraleapp;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,11 +25,17 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 	}
 
 	private void full() {
-		((ImageView) findViewById(R.id.icone)).setImageResource(R.drawable.ic_launcher);
+		ImageView imageViewIcone = (ImageView) findViewById(R.id.icone);
+		try {
+			Utilities.setImage(imageViewIcone, poi.getUrlImage());
+		} catch (IOException e) {
+			imageViewIcone.setImageResource(R.drawable.ic_launcher);
+			Log.i(C.TAG,"Image not found : "+e.getMessage());
+		}
 		((TextView) findViewById(R.id.nom)).setText(poi.getNom());
 		((TextView) findViewById(R.id.quartier)).setText(poi.getQuartier());
 		((TextView) findViewById(R.id.secteur)).setText(poi.getSecteur());
-		((TextView) findViewById(R.id.informations)).setText(poi.getInformations());
+		((TextView) findViewById(R.id.informations)).setText(poi.getInformations().replaceAll("</br>","\n"));
 		if (poi.isFavorite()){
 			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(R.drawable.defacto_poi_ajoutfavoris_b);
 		}
