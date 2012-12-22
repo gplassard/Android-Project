@@ -1,5 +1,6 @@
 package com.example.centraleapp;
 
+import java.io.IOException;
 import java.util.List;
 
 import android.content.Context;
@@ -11,9 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 public class PointOfInterestLittleAdapter extends BaseAdapter {
 	List<PointOfInterest> biblio;
 	LayoutInflater inflater;
@@ -24,9 +22,6 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		inflater = LayoutInflater.from(context);
 		this.biblio = objects;
 		this.context = context;
-		ImageLoader imageLoader = ImageLoader.getInstance();
-		ImageLoaderConfiguration config = ImageLoaderConfiguration.createDefault(context);
-		imageLoader.init(config);
 	}
 
 	@Override
@@ -62,9 +57,14 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		}
 
 		PointOfInterest poi = biblio.get(position);
-
-		//ImageLoader.getInstance().displayImage(poi.getUrlSmallImage(), holder.icone);
-		holder.icone.setImageResource(R.drawable.ic_launcher);
+		
+		try {
+			Utilities.setImage(holder.icone, poi.getUrlSmallImage());
+		} catch (IOException e) {
+			holder.icone.setImageResource(R.drawable.ic_launcher);
+			Log.i(C.TAG,e.getMessage());
+		}
+		
 		holder.tvNom.setText(poi.getNom());
 		holder.tvDescription.setText(poi.getShortDescription());
 		if (poi.isFavorite()){
