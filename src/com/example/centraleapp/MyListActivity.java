@@ -1,31 +1,42 @@
 package com.example.centraleapp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 
-public class MyListActivity extends Activity implements OnItemClickListener {
+public class MyListActivity extends Activity implements OnItemClickListener, TextWatcher {
 	public final static String KEY_INDICE_SELECTED = "SELECTED INDICE";	
-	List<PointOfInterest> pois;
+	List<PointOfInterest> allPois;
+	List<PointOfInterest> matchingPois;
+	PointOfInterestLittleAdapter poiAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_list);
-		pois = ((MyApplication) getApplication()).getPOIS();
+		allPois = ((MyApplication) getApplication()).getPOIS();
+		matchingPois = new ArrayList<PointOfInterest>();
+		matchingPois.addAll(allPois);
 
 		ListView listView = (ListView) findViewById(R.id.listView1);
-		PointOfInterestLittleAdapter poiAdapter = new PointOfInterestLittleAdapter(this, pois);
+		poiAdapter = new PointOfInterestLittleAdapter(this, matchingPois);
 		listView.setAdapter(poiAdapter);
 		
 		listView.setOnItemClickListener(this);
+		
+		EditText editText = (EditText) findViewById(R.id.editText1);
+		editText.addTextChangedListener(this);		
 	}
 
 	@Override
@@ -38,8 +49,25 @@ public class MyListActivity extends Activity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
 		Intent intentPointOfInterest = new Intent(this,PointOfInterestActivity.class);
-		intentPointOfInterest.putExtra(KEY_INDICE_SELECTED, position);
+		intentPointOfInterest.putExtra(KEY_INDICE_SELECTED, matchingPois.get(position).getId());
 		startActivity(intentPointOfInterest);
 	}
+
+	@Override
+	public void afterTextChanged(Editable recherche) {
+		matchingPois.clear();
+		for (PointOfInterest poi : allPois){
+			if (poi.matches(recherche.toString())){
+				matchingPois.add(poi);
+			}
+		}
+		poiAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,int arg3) {}
+
+	@Override
+	public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
 
 }

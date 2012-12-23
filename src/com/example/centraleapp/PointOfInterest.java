@@ -2,6 +2,7 @@ package com.example.centraleapp;
 
 
 public class PointOfInterest {
+	private Long id;
 	private String nom;
 	private String secteur;
 	private double longitude;
@@ -94,6 +95,20 @@ public class PointOfInterest {
 	public boolean isFavorite(){
 		//TODO
 		return favoris;
+	}
+	
+	public boolean matches(String recherche){
+		return nom.toLowerCase().contains(recherche.toLowerCase());
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

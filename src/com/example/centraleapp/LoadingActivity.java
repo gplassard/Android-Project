@@ -106,6 +106,7 @@ public class LoadingActivity extends Activity {
 	private PointOfInterest makePointOfInterest(JSONObject jsonObject)
 			throws JSONException {
 		PointOfInterest poi = new PointOfInterest();
+		poi.setId(jsonObject.getLong("id"));
 		poi.setNom(jsonObject.getString("nom"));
 		poi.setSecteur(jsonObject.getString("secteur"));
 		poi.setCategorie(jsonObject.getString("categorie_id"));
