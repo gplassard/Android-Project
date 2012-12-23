@@ -12,14 +12,20 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
-public class MyListActivity extends Activity implements OnItemClickListener, TextWatcher {
-	public final static String KEY_INDICE_SELECTED = "SELECTED INDICE";	
-	List<PointOfInterest> allPois;
-	List<PointOfInterest> matchingPois;
-	PointOfInterestLittleAdapter poiAdapter;
+public class MyListActivity extends Activity implements OnItemClickListener,
+		TextWatcher, OnItemSelectedListener {
+	public final static String KEY_INDICE_SELECTED = "SELECTED INDICE";
+	private List<PointOfInterest> allPois;
+	private List<PointOfInterest> matchingPois;
+	private List<Integer> categories;
+	private PointOfInterestLittleAdapter poiAdapter;
+	private Spinner spinnerCategories;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +38,27 @@ public class MyListActivity extends Activity implements OnItemClickListener, Tex
 		ListView listView = (ListView) findViewById(R.id.listView1);
 		poiAdapter = new PointOfInterestLittleAdapter(this, matchingPois);
 		listView.setAdapter(poiAdapter);
-		
+
 		listView.setOnItemClickListener(this);
-		
+
 		EditText editText = (EditText) findViewById(R.id.editText1);
-		editText.addTextChangedListener(this);		
+		editText.addTextChangedListener(this);
+
+		initializeCategoriesSpinner();
+
+	}
+
+	private void initializeCategoriesSpinner() {
+		categories = ((MyApplication) getApplication()).getCategories();
+		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		for (Integer categorie : categories){
+			adapter.add(categorie.toString());
+		}
+		
+		spinnerCategories = (Spinner) findViewById(R.id.spinner1);
+		spinnerCategories.setOnItemSelectedListener(this);
+		spinnerCategories.setAdapter(adapter);
 	}
 
 	@Override
@@ -47,17 +69,20 @@ public class MyListActivity extends Activity implements OnItemClickListener, Tex
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
-		Intent intentPointOfInterest = new Intent(this,PointOfInterestActivity.class);
-		intentPointOfInterest.putExtra(KEY_INDICE_SELECTED, matchingPois.get(position).getId());
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Intent intentPointOfInterest = new Intent(this,
+				PointOfInterestActivity.class);
+		intentPointOfInterest.putExtra(KEY_INDICE_SELECTED,
+				matchingPois.get(position).getId());
 		startActivity(intentPointOfInterest);
 	}
 
 	@Override
 	public void afterTextChanged(Editable recherche) {
 		matchingPois.clear();
-		for (PointOfInterest poi : allPois){
-			if (poi.matches(recherche.toString())){
+		for (PointOfInterest poi : allPois) {
+			if (poi.matches(recherche.toString())) {
 				matchingPois.add(poi);
 			}
 		}
@@ -65,9 +90,25 @@ public class MyListActivity extends Activity implements OnItemClickListener, Tex
 	}
 
 	@Override
-	public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,int arg3) {}
+	public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+			int arg3) {
+	}
 
 	@Override
-	public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+	public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+		matchingPois.clear();
+		for (PointOfInterest poi : allPois) {
+			if (poi.isOfCategorie(categories.get(pos))) {
+				matchingPois.add(poi);
+			}
+		}
+		poiAdapter.notifyDataSetChanged();	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {}
 
 }

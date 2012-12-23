@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -29,6 +30,7 @@ public class LoadingActivity extends Activity {
 
 	private ProgressBar progressBar;
 	private List<PointOfInterest> pois;
+	private List<Integer> categories;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class LoadingActivity extends Activity {
 		progressBar.setIndeterminate(false);
 		
 		pois = new ArrayList<PointOfInterest>();
+		categories = new ArrayList<Integer>();
 		
 		loadData();
 	}
@@ -71,6 +74,7 @@ public class LoadingActivity extends Activity {
 					for (int i = 0; i < jsonArray.length(); i++) {
 						progressBar.setProgress(i);
 						PointOfInterest poi = makePointOfInterest(jsonArray.getJSONObject(i));
+						extractCategory(jsonArray.getJSONObject(i));
 						pois.add(poi);
 						Log.i(C.TAG, poi.toString());
 						Log.i(C.TAG,i+"/"+jsonArray.length());
@@ -98,8 +102,24 @@ public class LoadingActivity extends Activity {
 
 	}
 
+	private void extractCategory(JSONObject jsonObject) {
+		try {
+			String categorie = jsonObject.getString("categorie_id");
+			if (categorie.length() ==1){
+				int cat = Integer.valueOf(categorie);
+				if (!categories.contains(cat)){
+					categories.add(cat);
+				}
+			}
+		} catch (JSONException e) {
+			Log.e(C.TAG,e.getMessage());
+		}
+	}
+
 	private void launchMainActivity() {
 		((MyApplication) getApplication()).setPOIS(pois);
+		Collections.sort(categories);
+		((MyApplication) getApplication()).setCategories(categories);
 		startActivity(new Intent(this, MainActivity.class));
 	}
 

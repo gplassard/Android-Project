@@ -100,7 +100,10 @@ public class PointOfInterest {
 	public boolean matches(String recherche){
 		return nom.toLowerCase().contains(recherche.toLowerCase());
 	}
-
+	
+	public boolean isOfCategorie(int idCategorie){
+		return categorie.contains(idCategorie+"");
+	}
 
 	public Long getId() {
 		return id;
