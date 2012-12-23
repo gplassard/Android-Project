@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
 	
 	@Override

@@ -49,7 +49,7 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 			holder.icone = (ImageView) convertView.findViewById(R.id.image);
 			holder.tvNom = (TextView) convertView.findViewById(R.id.textViewNom);
 			holder.tvDescription = (TextView) convertView.findViewById(R.id.textViewQuartierSecteur);
-			holder.iconeFavoris = (ImageView) convertView.findViewById(R.id.iconeFavori);
+			holder.tvCategorie = (TextView) convertView.findViewById(R.id.textViewCategorie);
 			convertView.setTag(holder);
 		} else {
 			Log.v("test", "convertView is not null");
@@ -67,12 +67,7 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		
 		holder.tvNom.setText(poi.getNom());
 		holder.tvDescription.setText(poi.getShortDescription());
-		if (poi.isFavorite()){
-			holder.iconeFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris_b);
-		}
-		else{
-			holder.iconeFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris);
-		}
+		holder.tvCategorie.setText(poi.getCategorie());
 		
 		return convertView;
 	}
@@ -81,7 +76,7 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		ImageView icone;
 		TextView tvNom;
 		TextView tvDescription;
-		ImageView iconeFavoris;
+		TextView tvCategorie;
 	}
 
 }

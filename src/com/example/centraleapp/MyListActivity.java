@@ -23,7 +23,7 @@ public class MyListActivity extends Activity implements OnItemClickListener,
 	public final static String KEY_INDICE_SELECTED = "SELECTED INDICE";
 	private List<PointOfInterest> allPois;
 	private List<PointOfInterest> matchingPois;
-	private List<Integer> categories;
+	private List<String> categories;
 	private PointOfInterestLittleAdapter poiAdapter;
 	private Spinner spinnerCategories;
 
@@ -52,8 +52,8 @@ public class MyListActivity extends Activity implements OnItemClickListener,
 		categories = ((MyApplication) getApplication()).getCategories();
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		for (Integer categorie : categories){
-			adapter.add(categorie.toString());
+		for (String categorie : categories){
+			adapter.add(categorie);
 		}
 		
 		spinnerCategories = (Spinner) findViewById(R.id.spinner1);

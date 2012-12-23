@@ -6,7 +6,7 @@ import android.app.Application;
 
 public class MyApplication extends Application {
 	private List<PointOfInterest> pois;
-	private List<Integer> categories;
+	private List<String> categories;
 	
 	public void setPOIS(List<PointOfInterest> pois){
 		this.pois = pois;
@@ -16,11 +16,11 @@ public class MyApplication extends Application {
 		return pois;
 	}
 
-	public void setCategories(List<Integer> categories) {
+	public void setCategories(List<String> categories) {
 		this.categories = categories;
 	}
 	
-	public List<Integer> getCategories(){
+	public List<String> getCategories(){
 		return categories;
 	}
 }

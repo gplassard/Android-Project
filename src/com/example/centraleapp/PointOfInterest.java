@@ -101,8 +101,8 @@ public class PointOfInterest {
 		return nom.toLowerCase().contains(recherche.toLowerCase());
 	}
 	
-	public boolean isOfCategorie(int idCategorie){
-		return categorie.contains(idCategorie+"");
+	public boolean isOfCategorie(String stringCategorie){
+		return categorie.contains(stringCategorie);
 	}
 
 	public Long getId() {

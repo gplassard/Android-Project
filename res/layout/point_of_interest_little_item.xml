@@ -4,13 +4,6 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/iconeFavori"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
-
-    <ImageView
         android:id="@+id/image"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -32,6 +25,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewNom"
         android:layout_centerHorizontal="true"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textViewCategorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:text="TextView" />
 
 </RelativeLayout>

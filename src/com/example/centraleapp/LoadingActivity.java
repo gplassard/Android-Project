@@ -30,31 +30,30 @@ public class LoadingActivity extends Activity {
 
 	private ProgressBar progressBar;
 	private List<PointOfInterest> pois;
-	private List<Integer> categories;
+	private List<String> categories;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-				.detectDiskReads().detectDiskWrites().detectNetwork() // or
-																		// .detectAll()
-																		// for
-																		// all
-																		// detectable
-																		// problems
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites()
+				.detectNetwork() // or
+									// .detectAll()
+									// for
+									// all
+									// detectable
+									// problems
 				.penaltyLog().build());
-		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-				.detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-				.penaltyLog().penaltyDeath().build());
+		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects()
+				.detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loading);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
 		progressBar.setIndeterminate(false);
-		
+
 		pois = new ArrayList<PointOfInterest>();
-		categories = new ArrayList<Integer>();
-		
+		categories = new ArrayList<String>();
+
 		loadData();
 	}
 
@@ -77,27 +76,23 @@ public class LoadingActivity extends Activity {
 						extractCategory(jsonArray.getJSONObject(i));
 						pois.add(poi);
 						Log.i(C.TAG, poi.toString());
-						Log.i(C.TAG,i+"/"+jsonArray.length());
+						Log.i(C.TAG, i + "/" + jsonArray.length());
 					}
 					launchMainActivity();
 
 				} catch (JSONException e) {
-					Toast.makeText(this, e.getMessage(),
-							Toast.LENGTH_LONG).show();
-					Log.e(C.TAG,e.getMessage());
+					Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+					Log.e(C.TAG, e.getMessage());
 				}
 			} else {
-				Toast.makeText(this, "Unable to complete the request",
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Unable to complete the request", Toast.LENGTH_LONG).show();
 			}
 		} catch (ClientProtocolException e) {
-			Toast.makeText(this, e.getMessage(),
-					Toast.LENGTH_LONG).show();
-			Log.e(C.TAG,e.getMessage());
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+			Log.e(C.TAG, e.getMessage());
 		} catch (IOException e) {
-			Toast.makeText(this, e.getMessage(),
-					Toast.LENGTH_LONG).show();
-			Log.e(C.TAG,e.getMessage());
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+			Log.e(C.TAG, e.getMessage());
 		}
 
 	}
@@ -105,26 +100,25 @@ public class LoadingActivity extends Activity {
 	private void extractCategory(JSONObject jsonObject) {
 		try {
 			String categorie = jsonObject.getString("categorie_id");
-			if (categorie.length() ==1){
-				int cat = Integer.valueOf(categorie);
-				if (!categories.contains(cat)){
-					categories.add(cat);
+			if (categorie.length() == 1) {
+				if (!categories.contains(categorie)) {
+					categories.add(categorie);
 				}
 			}
 		} catch (JSONException e) {
-			Log.e(C.TAG,e.getMessage());
+			Log.e(C.TAG, e.getMessage());
 		}
 	}
 
 	private void launchMainActivity() {
 		((MyApplication) getApplication()).setPOIS(pois);
 		Collections.sort(categories);
+		categories.add(0, "");
 		((MyApplication) getApplication()).setCategories(categories);
 		startActivity(new Intent(this, MainActivity.class));
 	}
 
-	private PointOfInterest makePointOfInterest(JSONObject jsonObject)
-			throws JSONException {
+	private PointOfInterest makePointOfInterest(JSONObject jsonObject) throws JSONException {
 		PointOfInterest poi = new PointOfInterest();
 		poi.setId(jsonObject.getLong("id"));
 		poi.setNom(jsonObject.getString("nom"));
@@ -156,7 +150,7 @@ public class LoadingActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.activity_loading, menu);
+		// getMenuInflater().inflate(R.menu.activity_loading, menu);
 		return true;
 	}
 
