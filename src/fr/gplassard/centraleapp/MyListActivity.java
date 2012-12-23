@@ -1,4 +1,4 @@
-package com.example.centraleapp;
+package fr.gplassard.centraleapp;
 
 import java.util.ArrayList;
 import java.util.List;

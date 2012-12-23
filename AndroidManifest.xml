@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.centraleapp"
+    package="fr.gplassard.centraleapp"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -11,13 +11,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.example.centraleapp.MyApplication"
+        android:name="fr.gplassard.centraleapp.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.centraleapp.LoadingActivity"
+            android:name="fr.gplassard.centraleapp.LoadingActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,20 +25,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.centraleapp.MainActivity" >
+        <activity android:name="fr.gplassard.centraleapp.MainActivity" >
         </activity>
-        <activity android:name="com.example.centraleapp.FavorisActivity" >
+        <activity android:name="fr.gplassard.centraleapp.FavorisActivity" >
         </activity>
-        <activity android:name="com.example.centraleapp.ListActivity" >
+        <activity android:name="fr.gplassard.centraleapp.ListActivity" >
         </activity>
-        <activity android:name="com.example.centraleapp.MyMapActivity" >
+        <activity android:name="fr.gplassard.centraleapp.MyMapActivity" >
         </activity>
         <activity
-            android:name="com.example.centraleapp.MyListActivity"
+            android:name="fr.gplassard.centraleapp.MyListActivity"
             android:label="@string/title_activity_my_list" >
         </activity>
         <activity
-            android:name="com.example.centraleapp.PointOfInterestActivity"
+            android:name="fr.gplassard.centraleapp.PointOfInterestActivity"
             android:label="@string/title_activity_point_of_interest" >
         </activity>
     </application>

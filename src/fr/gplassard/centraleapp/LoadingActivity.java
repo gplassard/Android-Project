@@ -1,4 +1,4 @@
-package com.example.centraleapp;
+package fr.gplassard.centraleapp;
 
 import java.io.BufferedReader;
 import java.io.IOException;

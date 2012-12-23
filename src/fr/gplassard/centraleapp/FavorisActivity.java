@@ -1,4 +1,4 @@
-package com.example.centraleapp;
+package fr.gplassard.centraleapp;
 
 import android.app.Activity;
 import android.os.Bundle;
