@@ -3,10 +3,12 @@ package fr.gplassard.centraleapp;
 import java.io.IOException;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -16,12 +18,14 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 	List<PointOfInterest> biblio;
 	LayoutInflater inflater;
 	Context context;
+	Activity launchingActivity;
 
 	public PointOfInterestLittleAdapter(Context context,
-			List<PointOfInterest> objects) {
+			List<PointOfInterest> objects, Activity launchingActivity) {
 		inflater = LayoutInflater.from(context);
 		this.biblio = objects;
 		this.context = context;
+		this.launchingActivity = launchingActivity;
 	}
 
 	@Override
@@ -50,13 +54,14 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 			holder.tvNom = (TextView) convertView.findViewById(R.id.textViewNom);
 			holder.tvDescription = (TextView) convertView.findViewById(R.id.textViewQuartierSecteur);
 			holder.tvCategorie = (TextView) convertView.findViewById(R.id.textViewCategorie);
+			holder.ivFavoris = (ImageView) convertView.findViewById(R.id.imageViewFavoris);
 			convertView.setTag(holder);
 		} else {
 			Log.v("test", "convertView is not null");
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		PointOfInterest poi = biblio.get(position);
+		final PointOfInterest poi = biblio.get(position);
 		
 		try {
 			Utilities.setImage(holder.icone, poi.getUrlSmallImage());
@@ -68,7 +73,21 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		holder.tvNom.setText(poi.getNom());
 		holder.tvDescription.setText(poi.getShortDescription());
 		holder.tvCategorie.setText(poi.getCategorie());
+		if (poi.isFavoris()){
+			holder.ivFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris_b);
+		}
+		else{
+			holder.ivFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris);
+		}	
 		
+		holder.ivFavoris.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				MyApplication application = (MyApplication) launchingActivity.getApplication();
+				application.setFavoris(poi, !poi.isFavoris());
+				notifyDataSetChanged();
+			}
+		});
 		return convertView;
 	}
 
@@ -77,6 +96,6 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		TextView tvNom;
 		TextView tvDescription;
 		TextView tvCategorie;
+		ImageView ivFavoris;
 	}
-
 }

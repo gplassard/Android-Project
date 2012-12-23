@@ -19,7 +19,7 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_point_of_interest);
-		Long id = getIntent().getExtras().getLong(MyListActivity.KEY_INDICE_SELECTED);
+		Long id = getIntent().getExtras().getLong(C.KEY_POI_SELECTED);
 		for (PointOfInterest pointOfInterest : ((MyApplication) getApplication()).getPOIS()){
 			if (pointOfInterest.getId() == id){
 				poi = pointOfInterest;
@@ -40,7 +40,7 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 		((TextView) findViewById(R.id.quartier)).setText(poi.getQuartier());
 		((TextView) findViewById(R.id.secteur)).setText(poi.getSecteur());
 		((TextView) findViewById(R.id.informations)).setText(poi.getInformations().replaceAll("</br>","\n"));
-		if (poi.isFavorite()){
+		if (poi.isFavoris()){
 			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(R.drawable.defacto_poi_ajoutfavoris_b);
 		}
 		else{

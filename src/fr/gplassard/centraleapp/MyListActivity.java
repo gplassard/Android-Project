@@ -20,7 +20,7 @@ import android.widget.Spinner;
 
 public class MyListActivity extends Activity implements OnItemClickListener,
 		TextWatcher, OnItemSelectedListener {
-	public final static String KEY_INDICE_SELECTED = "SELECTED INDICE";
+
 	private List<PointOfInterest> allPois;
 	private List<PointOfInterest> matchingPois;
 	private List<String> categories;
@@ -36,7 +36,7 @@ public class MyListActivity extends Activity implements OnItemClickListener,
 		matchingPois.addAll(allPois);
 
 		ListView listView = (ListView) findViewById(R.id.listView1);
-		poiAdapter = new PointOfInterestLittleAdapter(this, matchingPois);
+		poiAdapter = new PointOfInterestLittleAdapter(this, matchingPois,this);
 		listView.setAdapter(poiAdapter);
 
 		listView.setOnItemClickListener(this);
@@ -73,8 +73,7 @@ public class MyListActivity extends Activity implements OnItemClickListener,
 			long id) {
 		Intent intentPointOfInterest = new Intent(this,
 				PointOfInterestActivity.class);
-		intentPointOfInterest.putExtra(KEY_INDICE_SELECTED,
-				matchingPois.get(position).getId());
+		intentPointOfInterest.putExtra(C.KEY_POI_SELECTED,	matchingPois.get(position).getId());
 		startActivity(intentPointOfInterest);
 	}
 
