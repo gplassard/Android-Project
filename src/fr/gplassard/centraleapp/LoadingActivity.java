@@ -75,8 +75,8 @@ public class LoadingActivity extends Activity {
 						PointOfInterest poi = makePointOfInterest(jsonArray.getJSONObject(i));
 						extractCategory(jsonArray.getJSONObject(i));
 						pois.add(poi);
-						Log.i(C.TAG, poi.toString());
-						Log.i(C.TAG, i + "/" + jsonArray.length());
+//						Log.i(C.TAG, poi.toString());
+//						Log.i(C.TAG, i + "/" + jsonArray.length());
 					}
 					launchMainActivity();
 
@@ -112,6 +112,7 @@ public class LoadingActivity extends Activity {
 
 	private void launchMainActivity() {
 		((MyApplication) getApplication()).setPOIS(pois);
+		((MyApplication) getApplication()).initializeFavoris(this);
 		Collections.sort(categories);
 		categories.add(0, "");
 		((MyApplication) getApplication()).setCategories(categories);

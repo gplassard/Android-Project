@@ -47,7 +47,7 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			Log.v(C.TAG, "convertView is null");
+//			Log.v(C.TAG, "convertView is null");
 			holder = new ViewHolder();
 			convertView = inflater.inflate(	R.layout.point_of_interest_little_item, null);
 			holder.icone = (ImageView) convertView.findViewById(R.id.image);
@@ -57,7 +57,7 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 			holder.ivFavoris = (ImageView) convertView.findViewById(R.id.imageViewFavoris);
 			convertView.setTag(holder);
 		} else {
-			Log.v("test", "convertView is not null");
+//			Log.v("test", "convertView is not null");
 			holder = (ViewHolder) convertView.getTag();
 		}
 

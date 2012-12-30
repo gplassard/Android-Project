@@ -20,13 +20,6 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_point_of_interest);
 		poi = (PointOfInterest) getIntent().getExtras().get(C.SELECTED_POI);
-//		Long id = getIntent().getExtras().getLong(C.KEY_POI_SELECTED);
-//		for (PointOfInterest pointOfInterest : ((MyApplication) getApplication()).getPOIS()){
-//			if (pointOfInterest.getId() == id){
-//				poi = pointOfInterest;
-//				break;
-//			}
-//		}
 		full();
 	}
 
@@ -36,7 +29,7 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 			Utilities.setImage(imageViewIcone, poi.getUrlImage());
 		} catch (IOException e) {
 			imageViewIcone.setImageResource(R.drawable.ic_launcher);
-			Log.i(C.TAG,"Image not found : "+e.getMessage());
+//			Log.i(C.TAG,"Image not found : "+e.getMessage());
 		}
 		((TextView) findViewById(R.id.nom)).setText(poi.getNom());
 		((TextView) findViewById(R.id.quartier)).setText(poi.getQuartier());
