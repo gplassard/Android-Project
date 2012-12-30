@@ -43,9 +43,12 @@ public class MyListActivity extends Activity implements OnItemClickListener,
 
 		EditText editText = (EditText) findViewById(R.id.editText1);
 		editText.addTextChangedListener(this);
-
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
 		initializeCategoriesSpinner();
-
 	}
 
 	private void initializeCategoriesSpinner() {

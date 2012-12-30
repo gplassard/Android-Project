@@ -30,8 +30,6 @@ public class FavorisActivity extends Activity implements OnItemClickListener {
 			long id) {
 		Intent intentPointOfInterest = new Intent(this,	PointOfInterestActivity.class);
 		intentPointOfInterest.putExtra(C.SELECTED_POI, favoris.get(position));
-		//intentPointOfInterest.putExtra(C.KEY_POI_SELECTED,favoris.get(position).getId());
-		startActivity(intentPointOfInterest);
-		
+		startActivity(intentPointOfInterest);		
 	}
 }

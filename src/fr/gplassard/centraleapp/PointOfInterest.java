@@ -2,7 +2,7 @@ package fr.gplassard.centraleapp;
 
 import java.io.Serializable;
 
-public class PointOfInterest implements Serializable{
+public class PointOfInterest implements Serializable, Comparable<PointOfInterest>{
 	private static final long serialVersionUID = 1497440874729637254L;
 	private Long id;
 	private String nom;
@@ -125,6 +125,11 @@ public class PointOfInterest implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Override
+	public int compareTo(PointOfInterest another) {
+		return getNom().compareTo(another.getNom());
 	}
 
 }

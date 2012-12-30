@@ -1,5 +1,6 @@
 package fr.gplassard.centraleapp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Application;
@@ -13,12 +14,6 @@ public class MyApplication extends Application {
 	public MyApplication(){
 		super();
 		favoris = new ArrayList<PointOfInterest>();
-//		for (int i=0; i< pois.size();i++){
-//			if (i%25==0){
-//				favoris.add(pois.get(i));
-//				pois.get(i).setFavoris(true);
-//			}
-//		}
 	}
 	
 	public void setPOIS(List<PointOfInterest> pois){
@@ -45,6 +40,7 @@ public class MyApplication extends Application {
 		poi.setFavoris(isFavoris);
 		if (isFavoris){
 			favoris.add(poi);
+			Collections.sort(favoris);
 		}
 		else{
 			favoris.remove(poi);
