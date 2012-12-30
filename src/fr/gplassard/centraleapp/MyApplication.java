@@ -13,12 +13,12 @@ public class MyApplication extends Application {
 	public MyApplication(){
 		super();
 		favoris = new ArrayList<PointOfInterest>();
-		for (int i=0; i< pois.size();i++){
-			if (i%25==0){
-				favoris.add(pois.get(i));
-				pois.get(i).setFavoris(true);
-			}
-		}
+//		for (int i=0; i< pois.size();i++){
+//			if (i%25==0){
+//				favoris.add(pois.get(i));
+//				pois.get(i).setFavoris(true);
+//			}
+//		}
 	}
 	
 	public void setPOIS(List<PointOfInterest> pois){

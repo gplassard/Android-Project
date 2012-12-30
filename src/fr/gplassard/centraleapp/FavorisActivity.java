@@ -29,7 +29,8 @@ public class FavorisActivity extends Activity implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		Intent intentPointOfInterest = new Intent(this,	PointOfInterestActivity.class);
-		intentPointOfInterest.putExtra(C.KEY_POI_SELECTED,favoris.get(position).getId());
+		intentPointOfInterest.putExtra(C.SELECTED_POI, favoris.get(position));
+		//intentPointOfInterest.putExtra(C.KEY_POI_SELECTED,favoris.get(position).getId());
 		startActivity(intentPointOfInterest);
 		
 	}

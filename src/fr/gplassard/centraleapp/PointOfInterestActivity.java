@@ -19,12 +19,14 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_point_of_interest);
-		Long id = getIntent().getExtras().getLong(C.KEY_POI_SELECTED);
-		for (PointOfInterest pointOfInterest : ((MyApplication) getApplication()).getPOIS()){
-			if (pointOfInterest.getId() == id){
-				poi = pointOfInterest;
-			}
-		}
+		poi = (PointOfInterest) getIntent().getExtras().get(C.SELECTED_POI);
+//		Long id = getIntent().getExtras().getLong(C.KEY_POI_SELECTED);
+//		for (PointOfInterest pointOfInterest : ((MyApplication) getApplication()).getPOIS()){
+//			if (pointOfInterest.getId() == id){
+//				poi = pointOfInterest;
+//				break;
+//			}
+//		}
 		full();
 	}
 

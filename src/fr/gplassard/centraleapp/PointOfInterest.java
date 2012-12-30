@@ -1,6 +1,9 @@
 package fr.gplassard.centraleapp;
 
-public class PointOfInterest {
+import java.io.Serializable;
+
+public class PointOfInterest implements Serializable{
+	private static final long serialVersionUID = 1497440874729637254L;
 	private Long id;
 	private String nom;
 	private String secteur;

@@ -73,7 +73,7 @@ public class MyListActivity extends Activity implements OnItemClickListener,
 			long id) {
 		Intent intentPointOfInterest = new Intent(this,
 				PointOfInterestActivity.class);
-		intentPointOfInterest.putExtra(C.KEY_POI_SELECTED,	matchingPois.get(position).getId());
+		intentPointOfInterest.putExtra(C.SELECTED_POI, matchingPois.get(position));
 		startActivity(intentPointOfInterest);
 	}
 
