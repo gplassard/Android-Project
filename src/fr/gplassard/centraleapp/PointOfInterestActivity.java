@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,7 +27,7 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 		try {
 			Utilities.setImage(imageViewIcone, poi.getUrlImage());
 		} catch (IOException e) {
-			imageViewIcone.setImageResource(R.drawable.ic_launcher);
+			imageViewIcone.setImageResource(C.IMAGE_NOT_FOUND);
 //			Log.i(C.TAG,"Image not found : "+e.getMessage());
 		}
 		((TextView) findViewById(R.id.nom)).setText(poi.getNom());
@@ -36,10 +35,10 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 		((TextView) findViewById(R.id.secteur)).setText(poi.getSecteur());
 		((TextView) findViewById(R.id.informations)).setText(poi.getInformations().replaceAll("</br>","\n"));
 		if (poi.isFavoris()){
-			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(R.drawable.defacto_poi_ajoutfavoris_b);
+			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(C.IMAGE_FAVORIS);
 		}
 		else{
-			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(R.drawable.defacto_poi_ajoutfavoris);
+			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(C.IMAGE_PAS_FAVORIS);
 		}		
 		((Button) findViewById(R.id.boutonFavoris)).setOnClickListener(this);
 		((Button) findViewById(R.id.boutonCarte)).setOnClickListener(this);

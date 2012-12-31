@@ -66,7 +66,7 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		try {
 			Utilities.setImage(holder.icone, poi.getUrlSmallImage());
 		} catch (IOException e) {
-			holder.icone.setImageResource(R.drawable.ic_launcher);
+			holder.icone.setImageResource(C.IMAGE_NOT_FOUND);
 			Log.i(C.TAG,e.getMessage());
 		}
 		
@@ -74,10 +74,10 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 		holder.tvDescription.setText(poi.getShortDescription());
 		holder.tvCategorie.setText(poi.getCategorie());
 		if (poi.isFavoris()){
-			holder.ivFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris_b);
+			holder.ivFavoris.setImageResource(C.IMAGE_FAVORIS);
 		}
 		else{
-			holder.ivFavoris.setImageResource(R.drawable.defacto_poi_ajoutfavoris);
+			holder.ivFavoris.setImageResource(C.IMAGE_PAS_FAVORIS);
 		}	
 		
 		holder.ivFavoris.setOnClickListener(new OnClickListener() {			
