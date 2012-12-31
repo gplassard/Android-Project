@@ -27,7 +27,7 @@ public class MainActivity extends TabActivity {
 		tabSpec= tabHost.newTabSpec("Carte").setIndicator("Carte").setContent(intentMap);
 		tabHost.addTab(tabSpec);
 		
-		 tabHost.setCurrentTab(0);
+		tabHost.setCurrentTab(0);
 	}
 
 }

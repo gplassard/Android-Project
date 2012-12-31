@@ -1,11 +1,9 @@
 package fr.gplassard.centraleapp;
 
-import java.io.IOException;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,12 +61,13 @@ public class PointOfInterestLittleAdapter extends BaseAdapter {
 
 		final PointOfInterest poi = biblio.get(position);
 		
-		try {
-			Utilities.setImage(holder.icone, poi.getUrlSmallImage());
-		} catch (IOException e) {
-			holder.icone.setImageResource(C.IMAGE_NOT_FOUND);
-			Log.i(C.TAG,e.getMessage());
-		}
+//		try {
+//			Utilities.setImage(holder.icone, poi.getUrlSmallImage());
+//		} catch (IOException e) {
+//			holder.icone.setImageResource(C.IMAGE_NOT_FOUND);
+//			//Log.i(C.TAG,e.getMessage());
+//		}
+		holder.icone.setImageResource(C.IMAGE_NOT_FOUND);
 		
 		holder.tvNom.setText(poi.getNom());
 		holder.tvDescription.setText(poi.getShortDescription());

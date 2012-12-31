@@ -51,7 +51,7 @@ public class MyApplication extends Application {
 			favoris.remove(poi);
 		}
 		preferencesEditor.putBoolean(poi.getId().toString(), poi.isFavoris());
-		preferencesEditor.commit();
+		preferencesEditor.apply();
 	}
 	
 	public void initializeFavoris(Activity activite){

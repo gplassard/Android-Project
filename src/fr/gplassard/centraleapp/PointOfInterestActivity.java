@@ -3,6 +3,8 @@ package fr.gplassard.centraleapp;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -13,12 +15,14 @@ import android.widget.TextView;
 
 public class PointOfInterestActivity extends Activity implements OnClickListener {
 	private PointOfInterest poi;
+	private ImageView imageViewFavoris;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_point_of_interest);
 		poi = (PointOfInterest) getIntent().getExtras().get(C.SELECTED_POI);
+		imageViewFavoris =(ImageView) findViewById(R.id.iconeFavoris);
 		full();
 	}
 
@@ -28,18 +32,18 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 			Utilities.setImage(imageViewIcone, poi.getUrlImage());
 		} catch (IOException e) {
 			imageViewIcone.setImageResource(C.IMAGE_NOT_FOUND);
-//			Log.i(C.TAG,"Image not found : "+e.getMessage());
+			// Log.i(C.TAG,"Image not found : "+e.getMessage());
 		}
 		((TextView) findViewById(R.id.nom)).setText(poi.getNom());
 		((TextView) findViewById(R.id.quartier)).setText(poi.getQuartier());
 		((TextView) findViewById(R.id.secteur)).setText(poi.getSecteur());
-		((TextView) findViewById(R.id.informations)).setText(poi.getInformations().replaceAll("</br>","\n"));
-		if (poi.isFavoris()){
-			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(C.IMAGE_FAVORIS);
+		((TextView) findViewById(R.id.informations)).setText(poi.getInformations().replaceAll("</br>", "\n"));
+		
+		if (poi.isFavoris()) {
+			imageViewFavoris.setImageResource(C.IMAGE_FAVORIS);
+		} else {
+			imageViewFavoris.setImageResource(C.IMAGE_PAS_FAVORIS);
 		}
-		else{
-			((ImageView) findViewById(R.id.iconeFavoris)).setImageResource(C.IMAGE_PAS_FAVORIS);
-		}		
 		((Button) findViewById(R.id.boutonFavoris)).setOnClickListener(this);
 		((Button) findViewById(R.id.boutonCarte)).setOnClickListener(this);
 		((Button) findViewById(R.id.boutonYAller)).setOnClickListener(this);
@@ -55,8 +59,41 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 
 	@Override
 	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.boutonFavoris:
+			openFavorisPopup();
+			break;
+		case R.id.boutonCarte:
+			break;
+		case R.id.boutonYAller:
+			break;
+		}
+	}
 
-		
+	private void openFavorisPopup() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		if (poi.isFavoris())
+			builder.setMessage("Supprimer des favoris?");
+		else
+			builder.setMessage("Ajouter aux favoris?");
+		builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				((MyApplication) getApplication()).setFavoris(poi, !poi.isFavoris());
+				if (poi.isFavoris()) {
+					imageViewFavoris.setImageResource(C.IMAGE_FAVORIS);
+				} else {
+					imageViewFavoris.setImageResource(C.IMAGE_PAS_FAVORIS);
+				}
+				dialog.dismiss();
+			}
+		});
+		builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.dismiss();
+			}
+		});
+		builder.create();
+		builder.show();
 	}
 
 }

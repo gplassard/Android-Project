@@ -131,5 +131,16 @@ public class PointOfInterest implements Serializable, Comparable<PointOfInterest
 	public int compareTo(PointOfInterest another) {
 		return getNom().compareTo(another.getNom());
 	}
+	
+	@Override
+	public boolean equals(Object other){
+		if (other instanceof PointOfInterest){
+			PointOfInterest otherPOI = (PointOfInterest) other;
+			if (otherPOI.getId().equals(this.getId())){
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
