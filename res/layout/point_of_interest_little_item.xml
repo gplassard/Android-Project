@@ -38,7 +38,7 @@
         android:id="@+id/textViewCategorie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+       	android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/imageViewFavoris"
         android:text="TextView" />
 

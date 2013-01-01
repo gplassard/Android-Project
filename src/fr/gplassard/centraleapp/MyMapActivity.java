@@ -5,6 +5,7 @@ import java.util.List;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
@@ -24,24 +25,34 @@ public class MyMapActivity extends MapActivity {
 		mapView.setBuiltInZoomControls(true);
 		mapController = mapView.getController();
 		
-		myLocation = new MyLocationOverlay(getApplicationContext(), mapView);
-		mapView.getOverlays().add(myLocation);
-		myLocation.enableMyLocation();
+		int latitude = getIntent().getIntExtra(C.GO_TO_LATITUDE, 0);
+		int longitude = getIntent().getIntExtra(C.GO_TO_LONGITUDE,0);
 		
-		myLocation.runOnFirstFix(new Runnable(){
-			@Override
-			public void run() {
-				mapController.animateTo(myLocation.getMyLocation());
-				mapController.setZoom(17);
-			}			
-		});
+		myLocation = new MyLocationOverlay(getApplicationContext(), mapView);
+		myLocation.enableMyLocation();
+		if (latitude != 0.0 && longitude != 0.0){
+			GeoPoint destination = new GeoPoint(latitude,longitude);
+			mapController.animateTo(destination);
+			mapController.setZoom(20);
+		}
+		else{
+			myLocation.runOnFirstFix(new Runnable(){
+				@Override
+				public void run() {
+					mapController.animateTo(myLocation.getMyLocation());
+					mapController.setZoom(17);
+				}			
+			});
+		}
+		
+		mapView.getOverlays().add(myLocation);		
 		addOverlays();
 	}
 
 	private void addOverlays() {
 		List<Overlay> overlays = mapView.getOverlays();
 		Drawable icone = getResources().getDrawable(C.ICONE_ON_MAP);
-		PointOfInterestItemizedOverlay itemizedOverlay = new PointOfInterestItemizedOverlay(icone);
+		PointOfInterestItemizedOverlay itemizedOverlay = new PointOfInterestItemizedOverlay(icone,mapView,this);
 		
 		List<PointOfInterest> pois = ((MyApplication) getApplication()).getPOIS();
 		for (PointOfInterest poi : pois){

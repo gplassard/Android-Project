@@ -3,7 +3,6 @@ package fr.gplassard.centraleapp;
 import java.io.IOException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -65,19 +64,16 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 			openFavorisPopup();
 			break;
 		case R.id.boutonCarte:
+			Utilities.startMapActivity(poi.getLocation(),this);
 			break;
 		case R.id.boutonYAller:
+			Utilities.goToPoi(poi);
 			break;
 		}
 	}
 
 	private void openFavorisPopup() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		if (poi.isFavoris())
-			builder.setMessage("Supprimer des favoris?");
-		else
-			builder.setMessage("Ajouter aux favoris?");
-		builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+		DialogInterface.OnClickListener positiveClickListener = new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				((MyApplication) getApplication()).setFavoris(poi, !poi.isFavoris());
 				if (poi.isFavoris()) {
@@ -87,14 +83,9 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 				}
 				dialog.dismiss();
 			}
-		});
-		builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.dismiss();
-			}
-		});
-		builder.create();
-		builder.show();
+		};
+		Utilities.openFavorisPopup(poi, this, positiveClickListener);
 	}
+
 
 }

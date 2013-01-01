@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/styleLayoutPoiOnMap"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/tvNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/ivIcone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvNom"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:maxHeight="7dp"
+        android:maxWidth="7dp" />
+
+    <TextView
+        android:id="@+id/tvQuartier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivIcone"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/ivIcone"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvSecteur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tvQuartier"
+        android:layout_below="@+id/tvQuartier"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/buttonFavoris"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ivIcone"
+        android:layout_below="@+id/ivIcone"
+        android:layout_marginTop="5dp"
+        android:text="Favoris" />
+
+    <Button
+        android:id="@+id/buttonYAller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonFavoris"
+        android:layout_alignBottom="@+id/buttonFavoris"
+        android:layout_toRightOf="@+id/buttonFavoris"
+        android:layout_marginLeft="5dp"
+        android:text="Y aller" />
+
+    <Button
+        android:id="@+id/buttonDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonYAller"
+        android:layout_alignBottom="@+id/buttonYAller"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/buttonYAller"
+        android:text="Détails" />
+
+    <Button
+        android:id="@+id/buttonClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/buttonDetails"
+        android:text="X" />
+
+</RelativeLayout>
