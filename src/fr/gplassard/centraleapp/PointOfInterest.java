@@ -2,6 +2,8 @@ package fr.gplassard.centraleapp;
 
 import java.io.Serializable;
 
+import com.google.android.maps.GeoPoint;
+
 public class PointOfInterest implements Serializable, Comparable<PointOfInterest>{
 	private static final long serialVersionUID = 1497440874729637254L;
 	private Long id;
@@ -141,6 +143,11 @@ public class PointOfInterest implements Serializable, Comparable<PointOfInterest
 			}
 		}
 		return false;
+	}
+	
+	public GeoPoint getLocation(){
+		GeoPoint point = new GeoPoint((int)(latitude*1E6),(int)(longitude*1E6));
+		return point;
 	}
 
 }

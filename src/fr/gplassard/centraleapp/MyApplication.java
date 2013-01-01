@@ -1,7 +1,9 @@
 package fr.gplassard.centraleapp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.Application;
@@ -15,14 +17,20 @@ public class MyApplication extends Application {
 	private List<PointOfInterest> favoris;
 	private SharedPreferences preferences;
 	private SharedPreferences.Editor preferencesEditor;
+	private Map<Long,PointOfInterest> dico;
 	
 	public MyApplication(){
 		super();
 		favoris = new ArrayList<PointOfInterest>();
+		dico = new HashMap<Long, PointOfInterest>();
 	}
 	
 	public void setPOIS(List<PointOfInterest> pois){
 		this.pois = pois;
+		dico.clear();
+		for (PointOfInterest poi : pois){
+			dico.put(poi.getId(), poi);
+		}
 	}
 	
 	public List<PointOfInterest> getPOIS(){
@@ -62,5 +70,9 @@ public class MyApplication extends Application {
 			boolean isFavoris = preferences.getBoolean(clef, false);
 			setFavoris(poi, isFavoris);
 		}
+	}
+	
+	public PointOfInterest getPOI(long id){
+		return dico.get(id);
 	}
 }
