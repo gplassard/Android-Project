@@ -67,7 +67,7 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 			Utilities.startMapActivity(poi.getLocation(),this);
 			break;
 		case R.id.boutonYAller:
-			Utilities.goToPoi(poi);
+			Utilities.goToPoi(poi,this);
 			break;
 		}
 	}

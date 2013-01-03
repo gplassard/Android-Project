@@ -9,6 +9,12 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
+import android.location.LocationProvider;
+import android.util.Log;
+
+import com.google.android.maps.GeoPoint;
 
 
 public class MyApplication extends Application {
@@ -74,5 +80,22 @@ public class MyApplication extends Application {
 	
 	public PointOfInterest getPOI(long id){
 		return dico.get(id);
+	}
+	
+	public GeoPoint getLastKnownPosition(){
+		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);   
+		LocationProvider provider = lm.getProvider(LocationManager.GPS_PROVIDER);
+		Log.d(C.TAG,provider.toString());
+		Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);  
+		Log.d(C.TAG,location.toString());
+		double latitude = 0.0;
+		double longitude = 0.0;
+		
+		if(location != null){
+			latitude = location.getLatitude();
+			longitude = location.getLongitude();
+		}
+		
+		return new GeoPoint((int) (latitude *1E6), (int) (longitude *1E6));
 	}
 }

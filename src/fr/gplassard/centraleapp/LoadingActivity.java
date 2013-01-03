@@ -31,6 +31,7 @@ public class LoadingActivity extends Activity {
 	private ProgressBar progressBar;
 	private List<PointOfInterest> pois;
 	private List<String> categories;
+	private boolean alreadyLoaded = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,14 @@ public class LoadingActivity extends Activity {
 		categories = new ArrayList<String>();
 
 		loadData();
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		if (alreadyLoaded){
+			finish();
+		}
 	}
 
 	private void loadData() {
@@ -105,6 +114,7 @@ public class LoadingActivity extends Activity {
 	}
 
 	private void launchMainActivity() {
+		alreadyLoaded = true;
 		((MyApplication) getApplication()).setPOIS(pois);
 		((MyApplication) getApplication()).initializeFavoris(this);
 		Collections.sort(categories);

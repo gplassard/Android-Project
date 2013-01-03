@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.widget.ImageView;
 
 import com.google.android.maps.GeoPoint;
@@ -52,10 +53,30 @@ public class Utilities {
 		launchingActivity.startActivity(intentPOIActivity);
 	}
 
-	public static void goToPoi(PointOfInterest currentPOI) {
-		// TODO Auto-generated method stub
-		
+	public static void goToPoi(PointOfInterest currentPOI, Activity activity) {
+		Intent i = new Intent(Intent.ACTION_VIEW);
+//		GeoPoint currentPosition = ((MyApplication) activity.getApplication()).getLastKnownPosition();
+//		double currentLat = ((double) currentPosition.getLatitudeE6()) / 1E6;
+//		double currentLon = ((double) currentPosition.getLongitudeE6()) / 1E6;
+		Uri u = Uri.parse(getUrl(currentPOI.getLatitude(), currentPOI.getLongitude()));
+		i.setData(u);
+		activity.startActivity(i); 
 	}
+	
+	private static String getUrl(  double toLat, double toLon) {// connect to map web service
+			  StringBuffer urlString = new StringBuffer();
+			  urlString.append("http://maps.google.com/maps?f=d&hl=fr");
+//			  urlString.append("&saddr=");// from
+//			  urlString.append(Double.toString(fromLat));
+//			  urlString.append(",");
+//			  urlString.append(Double.toString(fromLon));
+			  urlString.append("&daddr=");// to
+			  urlString.append(Double.toString(toLat));
+			  urlString.append(",");
+			  urlString.append(Double.toString(toLon));
+			  urlString.append("&ie=UTF8&0&om=0");
+			  return urlString.toString();
+			 }
 
 	public static void startMapActivity(GeoPoint location, Activity launchingActivity) {
 		Intent intentMapActivity = new Intent(launchingActivity, MyMapActivity.class);

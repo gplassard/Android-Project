@@ -96,7 +96,7 @@ public class PointOfInterestItemizedOverlay extends ItemizedOverlay<OverlayItem>
 			openFavorisPopup();
 			break;
 		case R.id.buttonYAller:
-			Utilities.goToPoi(currentPOI);
+			Utilities.goToPoi(currentPOI,activity);
 			break;
 		}
 
