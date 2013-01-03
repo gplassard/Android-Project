@@ -23,6 +23,7 @@ public class PointOfInterestActivity extends Activity implements OnClickListener
 		long id = (Long) getIntent().getExtras().get(C.KEY_SELECTED_POI);
 		poi = ((MyApplication) getApplication()).getPOI(id);
 		imageViewFavoris =(ImageView) findViewById(R.id.iconeFavoris);
+		setTitle(poi.getNom());
 		full();
 	}
 

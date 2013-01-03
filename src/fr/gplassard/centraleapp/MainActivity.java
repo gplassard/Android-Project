@@ -20,6 +20,10 @@ public class MainActivity extends TabActivity {
 		Intent intentFavoris = new Intent(this,FavorisActivity.class);
 		Intent intentMap = new Intent(this,MyMapActivity.class);
 		
+		if (launchMap()){
+			intentMap.putExtras(getIntent());
+		}
+		
 		TabSpec tabSpec = tabHost.newTabSpec("Liste").setIndicator("Liste").setContent(intentList);
 		tabHost.addTab(tabSpec);
 		tabSpec = tabHost.newTabSpec("Favoris").setIndicator("Favoris").setContent(intentFavoris);
@@ -27,7 +31,20 @@ public class MainActivity extends TabActivity {
 		tabSpec= tabHost.newTabSpec("Carte").setIndicator("Carte").setContent(intentMap);
 		tabHost.addTab(tabSpec);
 		
-		tabHost.setCurrentTab(0);
+		if (launchMap()){
+			tabHost.setCurrentTab(2);
+		}
+		else{
+			tabHost.setCurrentTab(0);
+		}		
+	}
+
+	private boolean launchMap() {
+		Bundle extras = getIntent().getExtras();
+		if (extras == null){
+			return false;
+		}
+		return extras.containsKey(C.GO_TO_LATITUDE) && extras.containsKey(C.GO_TO_LONGITUDE);
 	}
 
 }

@@ -7,6 +7,6 @@ public class C {
 	public final static String GO_TO_LONGITUDE = "GO TO LONGITUDE";
 	public final static int IMAGE_FAVORIS = R.drawable.defacto_poi_ajoutfavoris_b;
 	public final static int IMAGE_PAS_FAVORIS = R.drawable.defacto_poi_ajoutfavoris;
-	public final static int IMAGE_NOT_FOUND = R.drawable.ic_launcher;
+	public final static int IMAGE_NOT_FOUND = R.drawable.icon;
 	public final static int ICONE_ON_MAP = R.drawable.icone_poi;
 }

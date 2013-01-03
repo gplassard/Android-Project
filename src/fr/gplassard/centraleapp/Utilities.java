@@ -79,10 +79,10 @@ public class Utilities {
 			 }
 
 	public static void startMapActivity(GeoPoint location, Activity launchingActivity) {
-		Intent intentMapActivity = new Intent(launchingActivity, MyMapActivity.class);
-		intentMapActivity.putExtra(C.GO_TO_LATITUDE, location.getLatitudeE6());
-		intentMapActivity.putExtra(C.GO_TO_LONGITUDE, location.getLongitudeE6());
-		launchingActivity.startActivity(intentMapActivity);
+		Intent intentMainActivity = new Intent(launchingActivity, MainActivity.class);
+		intentMainActivity.putExtra(C.GO_TO_LATITUDE, location.getLatitudeE6());
+		intentMainActivity.putExtra(C.GO_TO_LONGITUDE, location.getLongitudeE6());
+		launchingActivity.startActivity(intentMainActivity);
 	}
 
 }
